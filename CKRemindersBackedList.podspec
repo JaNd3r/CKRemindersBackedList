@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "CKRemindersBackedList"
-  s.version      = "0.1.0"
+  s.version      = "0.1.1"
   s.summary      = "Leverage the power of reminders within your app."
 
   s.description  = <<-DESC
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "9.0"
   s.requires_arc = true
 
-  s.source       = { :git => "https://github.com/JaNd3r/CKRemindersBackedList.git", :tag => "0.1.0" }
+  s.source       = { :git => "https://github.com/JaNd3r/CKRemindersBackedList.git", :tag => "0.1.1" }
 
   s.source_files  = "CKRemindersBackedList/*.swift"
 
