@@ -11,9 +11,13 @@ import CKRemindersBackedList
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    struct Entry {
+    struct Entry: CKReminderIdentifiable {
         let title: String
         let detail: String
+        
+        func identificationForReminder() -> String {
+            return title
+        }
     }
     
     var entries = Array<Entry>()
@@ -59,7 +63,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let markButton = cell.viewWithTag(3) as! UIButton
         markButton.accessibilityHint = "\(indexPath.row)"
         markButton.addTarget(self, action: #selector(ViewController.toggleMarkButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        if (self.remindersBackedList.containsEntry(entry.title)) {
+        if (self.remindersBackedList.containsEntry(entry)) {
             markButton.setTitle("Unmark", forState: UIControlState.Normal)
         } else {
             markButton.setTitle("Mark", forState: UIControlState.Normal)
@@ -75,10 +79,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let entry = entries[index]
         
-        if (self.remindersBackedList.containsEntry(entry.title)) {
-            self.remindersBackedList.removeEntry(entry.title)
+        if (self.remindersBackedList.containsEntry(entry)) {
+            self.remindersBackedList.removeEntry(entry)
         } else {
-            self.remindersBackedList.addEntry(entry.title, withNotes: entry.detail)
+            self.remindersBackedList.addEntry(entry, withNotes: entry.detail)
         }
         
         let path = NSIndexPath(forRow: index, inSection: 0)
