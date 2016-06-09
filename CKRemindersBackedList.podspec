@@ -12,7 +12,6 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage     = "https://github.com/JaNd3r/CKRemindersBackedList"
-  s.screenshots  = ""
 
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author             = { "Christian Klaproth" => "ck@cm-works.de" }
