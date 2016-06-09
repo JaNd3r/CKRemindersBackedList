@@ -8,6 +8,10 @@
 import UIKit
 import EventKit
 
+public protocol CKReminderIdentifiable {
+    func identificationForReminder() -> String
+}
+
 public class CKRemindersBackedList: NSObject {
 
     let eventStore: EKEventStore
@@ -67,13 +71,29 @@ public class CKRemindersBackedList: NSObject {
 
     }
     
+    public func accessGranted() -> Bool {
+
+        return true
+    }
+    
+    public func containsEntry(entry: CKReminderIdentifiable) -> Bool {
+        
+        return self.containsEntry(entry.identificationForReminder())
+    }
+    
     public func containsEntry(key: String) -> Bool {
+        
         if let _ = getEntryForKey(key) {
             return true
         }
         return false
     }
 
+    public func addEntry(entry: CKReminderIdentifiable, withNotes: String) {
+        
+        self.addEntry(entry.identificationForReminder(), withNotes: withNotes)
+    }
+    
     public func addEntry(key: String, withNotes notes: String?) {
         
         let reminder = EKReminder(eventStore: self.eventStore)
@@ -88,9 +108,14 @@ public class CKRemindersBackedList: NSObject {
         do {
             try self.eventStore.saveReminder(reminder, commit: true)
             self.reminders.append(reminder)
-        } catch {
-            print("Reminder could not be saved to EventStore.")
+        } catch let error as NSError {
+            print("Reminder could not be saved to EventStore. (Reason: \(error.localizedDescription))")
         }
+    }
+    
+    public func removeEntry(entry: CKReminderIdentifiable) {
+        
+        self.removeEntry(entry.identificationForReminder())
     }
     
     public func removeEntry(key: String) {
@@ -102,8 +127,8 @@ public class CKRemindersBackedList: NSObject {
                 if let index = self.reminders.indexOf(reminder) {
                     self.reminders.removeAtIndex(index)
                 }
-            } catch {
-                print("Reminder could not be deleted from EventStore.")
+            } catch let error as NSError {
+                print("Reminder could not be deleted from EventStore. (Reason: \(error.localizedDescription))")
             }
         } else {
             print("Reminder '\(key)' not found.")
