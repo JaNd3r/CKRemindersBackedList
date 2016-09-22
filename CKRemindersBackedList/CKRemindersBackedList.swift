@@ -12,19 +12,19 @@ public protocol CKReminderIdentifiable {
     func identificationForReminder() -> String
 }
 
-public class CKRemindersBackedList: NSObject {
+open class CKRemindersBackedList: NSObject {
 
     let eventStore: EKEventStore
     var eventCalendar: EKCalendar!
     var reminders = Array<EKReminder>()
     
-    private override init() {
+    fileprivate override init() {
 
         self.eventStore = EKEventStore()
         
         super.init()
         
-        self.eventStore.requestAccessToEntityType(EKEntityType.Reminder) { (granted, error) in
+        self.eventStore.requestAccess(to: EKEntityType.reminder) { (granted, error) in
             if (granted) {
                 print("Access granted for calendar.")
             } else {
@@ -42,7 +42,7 @@ public class CKRemindersBackedList: NSObject {
 
         self.init()
         
-        let reminderLists = self.eventStore.calendarsForEntityType(EKEntityType.Reminder).filter { (cal) -> Bool in
+        let reminderLists = self.eventStore.calendars(for: EKEntityType.reminder).filter { (cal) -> Bool in
             return cal.title == name
         }
         
@@ -52,10 +52,10 @@ public class CKRemindersBackedList: NSObject {
             print("Using existing calendar.")
         } else {
             // create new calendar
-            self.eventCalendar = EKCalendar(forEntityType: EKEntityType.Reminder, eventStore: self.eventStore)
+            self.eventCalendar = EKCalendar(for: EKEntityType.reminder, eventStore: self.eventStore)
             self.eventCalendar.title = name
             if let calendarColor = color {
-                self.eventCalendar.CGColor = calendarColor.CGColor
+                self.eventCalendar.cgColor = calendarColor.cgColor
             }
             self.eventCalendar.source = self.eventStore.defaultCalendarForNewReminders().source
             
@@ -71,17 +71,17 @@ public class CKRemindersBackedList: NSObject {
 
     }
     
-    public func accessGranted() -> Bool {
+    open func accessGranted() -> Bool {
 
         return true
     }
     
-    public func containsEntry(entry: CKReminderIdentifiable) -> Bool {
+    open func containsEntry(_ entry: CKReminderIdentifiable) -> Bool {
         
         return self.containsEntry(entry.identificationForReminder())
     }
     
-    public func containsEntry(key: String) -> Bool {
+    open func containsEntry(_ key: String) -> Bool {
         
         if let _ = getEntryForKey(key) {
             return true
@@ -89,43 +89,43 @@ public class CKRemindersBackedList: NSObject {
         return false
     }
 
-    public func addEntry(entry: CKReminderIdentifiable, withNotes: String) {
+    open func addEntry(_ entry: CKReminderIdentifiable, withNotes: String) {
         
         self.addEntry(entry.identificationForReminder(), withNotes: withNotes)
     }
     
-    public func addEntry(key: String, withNotes notes: String?) {
+    open func addEntry(_ key: String, withNotes notes: String?) {
         
         let reminder = EKReminder(eventStore: self.eventStore)
         reminder.title = key
         reminder.notes = notes
         reminder.calendar = self.eventCalendar
         
-        let today = NSDate()
-        let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        reminder.dueDateComponents = gregorian?.components([NSCalendarUnit.Day, NSCalendarUnit.Month, NSCalendarUnit.Year], fromDate: today)
+        let today = Date()
+        let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+        reminder.dueDateComponents = (gregorian as NSCalendar?)?.components([NSCalendar.Unit.day, NSCalendar.Unit.month, NSCalendar.Unit.year], from: today)
         
         do {
-            try self.eventStore.saveReminder(reminder, commit: true)
+            try self.eventStore.save(reminder, commit: true)
             self.reminders.append(reminder)
         } catch let error as NSError {
             print("Reminder could not be saved to EventStore. (Reason: \(error.localizedDescription))")
         }
     }
     
-    public func removeEntry(entry: CKReminderIdentifiable) {
+    open func removeEntry(_ entry: CKReminderIdentifiable) {
         
         self.removeEntry(entry.identificationForReminder())
     }
     
-    public func removeEntry(key: String) {
+    open func removeEntry(_ key: String) {
         
         if let reminder = getEntryForKey(key) {
         
             do {
-                try self.eventStore.removeReminder(reminder, commit: true)
-                if let index = self.reminders.indexOf(reminder) {
-                    self.reminders.removeAtIndex(index)
+                try self.eventStore.remove(reminder, commit: true)
+                if let index = self.reminders.index(of: reminder) {
+                    self.reminders.remove(at: index)
                 }
             } catch let error as NSError {
                 print("Reminder could not be deleted from EventStore. (Reason: \(error.localizedDescription))")
@@ -135,18 +135,18 @@ public class CKRemindersBackedList: NSObject {
         }
     }
     
-    func getEntryForKey(key: String) -> EKReminder? {
+    func getEntryForKey(_ key: String) -> EKReminder? {
         return self.reminders.filter { (reminder) -> Bool in
-            return reminder.title == key && !reminder.completed
+            return reminder.title == key && !reminder.isCompleted
         }.first
     }
     
     func updateEntries() {
-        let predicate = self.eventStore.predicateForRemindersInCalendars([self.eventCalendar])
-        self.eventStore.fetchRemindersMatchingPredicate(predicate) { (result) in
+        let predicate = self.eventStore.predicateForReminders(in: [self.eventCalendar])
+        self.eventStore.fetchReminders(matching: predicate) { (result) in
             if let reminderList = result {
                 self.reminders.removeAll()
-                self.reminders.appendContentsOf(reminderList)
+                self.reminders.append(contentsOf: reminderList)
             }
         }
     }

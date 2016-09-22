@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  RemindersBackedListDemo
+
+  Created by Christian Klaproth on 22.09.16.
+  Copyright © 2016 Christian Klaproth. All rights reserved.
+*/
+
+NSRemindersUsageDescription = "This app wants to create and remove reminders on your behalf.";

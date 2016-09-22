@@ -22,7 +22,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var entries = Array<Entry>()
     
-    let remindersBackedList = CKRemindersBackedList(name: "RemindersBackedListDemo", color: UIColor.blueColor())
+    let remindersBackedList = CKRemindersBackedList(name: "RemindersBackedListDemo", color: UIColor.blue)
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -41,18 +41,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Dispose of any resources that can be recreated.
     }
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return entries.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let entry = entries[indexPath.row]
+        let entry = entries[(indexPath as NSIndexPath).row]
         
         let titleLabel = cell.viewWithTag(1) as! UILabel
         let detailLabel = cell.viewWithTag(2) as! UILabel
@@ -61,18 +61,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         detailLabel.text = entry.detail
         
         let markButton = cell.viewWithTag(3) as! UIButton
-        markButton.accessibilityHint = "\(indexPath.row)"
-        markButton.addTarget(self, action: #selector(ViewController.toggleMarkButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        markButton.accessibilityHint = "\((indexPath as NSIndexPath).row)"
+        markButton.addTarget(self, action: #selector(ViewController.toggleMarkButton(_:)), for: UIControlEvents.touchUpInside)
         if (self.remindersBackedList.containsEntry(entry)) {
-            markButton.setTitle("Unmark", forState: UIControlState.Normal)
+            markButton.setTitle("Unmark", for: UIControlState())
         } else {
-            markButton.setTitle("Mark", forState: UIControlState.Normal)
+            markButton.setTitle("Mark", for: UIControlState())
         }
         
         return cell
     }
     
-    func toggleMarkButton(sender: UIButton) {
+    func toggleMarkButton(_ sender: UIButton) {
         let index = Int(sender.accessibilityHint!)!
         
         print("Toggle Button pressed at index \(index).")
@@ -85,8 +85,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             self.remindersBackedList.addEntry(entry, withNotes: entry.detail)
         }
         
-        let path = NSIndexPath(forRow: index, inSection: 0)
-        self.tableView.reloadRowsAtIndexPaths([path], withRowAnimation: UITableViewRowAnimation.Fade)
+        let path = IndexPath(row: index, section: 0)
+        self.tableView.reloadRows(at: [path], with: UITableViewRowAnimation.fade)
     }
 }
 

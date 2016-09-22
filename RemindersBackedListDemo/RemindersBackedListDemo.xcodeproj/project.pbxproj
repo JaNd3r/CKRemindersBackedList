@@ -14,6 +14,7 @@
 		1D2F30E51CFD560000439A8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D2F30E41CFD560000439A8E /* Assets.xcassets */; };
 		1D2F30E81CFD560000439A8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D2F30E61CFD560000439A8E /* LaunchScreen.storyboard */; };
 		1D2F30F81CFE1E2100439A8E /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 1D2F30F71CFE1E2100439A8E /* Podfile */; };
+		1DB924601D93FA3600633899 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DB9245F1D93FA3600633899 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		1D2F30E71CFD560000439A8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1D2F30E91CFD560000439A8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D2F30F71CFE1E2100439A8E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		1DB9245F1D93FA3600633899 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		7BF7E222D8C718B22A4F8AB7 /* Pods-RemindersBackedListDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemindersBackedListDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-RemindersBackedListDemo/Pods-RemindersBackedListDemo.release.xcconfig"; sourceTree = "<group>"; };
 		9315CECD6AE8586A38D06A62 /* Pods-RemindersBackedListDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemindersBackedListDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RemindersBackedListDemo/Pods-RemindersBackedListDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		BFD14721898641E2FF45F42A /* Pods_RemindersBackedListDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RemindersBackedListDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +72,7 @@
 				1D2F30E41CFD560000439A8E /* Assets.xcassets */,
 				1D2F30E61CFD560000439A8E /* LaunchScreen.storyboard */,
 				1D2F30E91CFD560000439A8E /* Info.plist */,
+				1DB9245F1D93FA3600633899 /* InfoPlist.strings */,
 			);
 			path = RemindersBackedListDemo;
 			sourceTree = "<group>";
@@ -98,12 +101,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D2F30EC1CFD560000439A8E /* Build configuration list for PBXNativeTarget "RemindersBackedListDemo" */;
 			buildPhases = (
-				FE5E59F7C20A6170420D5F42 /* 📦 Check Pods Manifest.lock */,
+				FE5E59F7C20A6170420D5F42 /* [CP] Check Pods Manifest.lock */,
 				1D2F30D61CFD560000439A8E /* Sources */,
 				1D2F30D71CFD560000439A8E /* Frameworks */,
 				1D2F30D81CFD560000439A8E /* Resources */,
-				522C3C4D87AD97118BBC35FB /* 📦 Embed Pods Frameworks */,
-				1B7847028480BA3DC375C306 /* 📦 Copy Pods Resources */,
+				522C3C4D87AD97118BBC35FB /* [CP] Embed Pods Frameworks */,
+				1B7847028480BA3DC375C306 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -121,11 +124,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Christian Klaproth";
 				TargetAttributes = {
 					1D2F30D91CFD560000439A8E = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -156,20 +160,21 @@
 				1D2F30E51CFD560000439A8E /* Assets.xcassets in Resources */,
 				1D2F30F81CFE1E2100439A8E /* Podfile in Resources */,
 				1D2F30E31CFD560000439A8E /* Main.storyboard in Resources */,
+				1DB924601D93FA3600633899 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1B7847028480BA3DC375C306 /* 📦 Copy Pods Resources */ = {
+		1B7847028480BA3DC375C306 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,14 +182,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RemindersBackedListDemo/Pods-RemindersBackedListDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		522C3C4D87AD97118BBC35FB /* 📦 Embed Pods Frameworks */ = {
+		522C3C4D87AD97118BBC35FB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,14 +197,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RemindersBackedListDemo/Pods-RemindersBackedListDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FE5E59F7C20A6170420D5F42 /* 📦 Check Pods Manifest.lock */ = {
+		FE5E59F7C20A6170420D5F42 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -255,8 +260,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -301,8 +308,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -321,6 +330,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -330,11 +340,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9315CECD6AE8586A38D06A62 /* Pods-RemindersBackedListDemo.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RemindersBackedListDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.cm-works.ios.RemindersBackedListDemo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -342,11 +354,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7BF7E222D8C718B22A4F8AB7 /* Pods-RemindersBackedListDemo.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RemindersBackedListDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.cm-works.ios.RemindersBackedListDemo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
